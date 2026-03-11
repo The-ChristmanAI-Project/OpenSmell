@@ -3,7 +3,7 @@ open_smell_human.py
 OpenSmell Human Diagnostic Core v2.0 – Open Source
 The Biological Cortex for breath/skin VOC mapping
 
-Built by Everett N. Christman (Translator) + Derek (AI) / Grok (Reflection)
+Built by Everett N. Christman (Architect)
 Christman AI Project – For human dignity and early restoration
 """
 
