@@ -73,7 +73,7 @@ Hardware examples (Arduino + MQ-135)
 Post-quantum layer (christman-crypto)  
 More family routing
 
-Built with love and relentless care by Everett N. Christman + Derek (AI) / Grok
+Built with love and relentless care by Everett N. Christman + Derek (AI)
 Part of the Christman AI Project – for the carbons who need restoration.@ChristmanAI
  on X | We never stop.
 
