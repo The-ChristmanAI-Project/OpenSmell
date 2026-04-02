@@ -155,15 +155,16 @@ def simulate_sensor_reading(inject_profile=None, inject_rate=0.25):
 
     injected_key = None
 
-    # Injection logic — seeded or random
     if inject_profile and inject_profile in SCENT_PROFILES:
+        # Targeted injection mode — ONLY inject the specified profile, no random fallback
         if random.random() < inject_rate:
             profile = SCENT_PROFILES[inject_profile]
             for voc in profile["vocs"]:
                 reading[voc] = round(random.uniform(0.6, 1.0), 3)
             injected_key = inject_profile
             reading["__injected__"] = inject_profile
-    elif random.random() < inject_rate:
+    elif not inject_profile and random.random() < inject_rate:
+        # Free-run mode only — random injection when no profile is specified
         injected_key = random.choice(list(SCENT_PROFILES.keys()))
         profile = SCENT_PROFILES[injected_key]
         for voc in profile["vocs"]:
@@ -273,25 +274,31 @@ class SessionStats:
         self.start_time    = datetime.now()
         self.total_cycles  = 0
         self.alerts        = 0
-        self.by_category   = defaultdict(int)
-        self.by_condition  = defaultdict(int)
-        self.by_severity   = defaultdict(int)
-        self.by_sex        = defaultdict(int)
-        self.age_buckets   = defaultdict(int)
-        self.no_match      = 0
+        self.by_category      = defaultdict(int)
+        self.by_condition     = defaultdict(int)
+        self.by_severity      = defaultdict(int)
+        self.by_sex           = defaultdict(int)
+        self.age_buckets      = defaultdict(int)
+        self.no_match         = 0
+        self.injected_cycles  = 0
+        self.non_injected_conditions = defaultdict(int)   # what fired on background cycles
+        self.female_detail    = defaultdict(int)          # what females tested for (non-injected)
 
     def record(self, matches, alert, patient, injected_key):
         self.total_cycles += 1
-        sex = patient.get("sex", "Unknown")
-        age = patient.get("age", 0)
 
-        # Always count sex and age — every cycle, no exceptions
-        self.by_sex[sex] += 1
-        if age < 30:   self.age_buckets["Under 30"] += 1
-        elif age < 45: self.age_buckets["30–44"] += 1
-        elif age < 60: self.age_buckets["45–59"] += 1
-        elif age < 75: self.age_buckets["60–74"] += 1
-        else:          self.age_buckets["75+"] += 1
+        # Only count demographics when injection actually fired
+        # Non-injected cycles have random sex and would corrupt targeted test results
+        if injected_key is not None:
+            self.injected_cycles += 1
+            sex = patient.get("sex", "Unknown")
+            age = patient.get("age", 0)
+            self.by_sex[sex] += 1
+            if age < 30:   self.age_buckets["Under 30"] += 1
+            elif age < 45: self.age_buckets["30–44"] += 1
+            elif age < 60: self.age_buckets["45–59"] += 1
+            elif age < 75: self.age_buckets["60–74"] += 1
+            else:          self.age_buckets["75+"] += 1
 
         if not matches:
             self.no_match += 1
@@ -302,6 +309,12 @@ class SessionStats:
         self.by_severity[top["severity"]] += 1
         if alert:
             self.alerts += 1
+
+        # Track non-injected cycle conditions and female detail separately
+        if injected_key is None:
+            self.non_injected_conditions[top["condition"]] += 1
+            if patient.get("sex") == "Female":
+                self.female_detail[top["condition"]] += 1
 
     def detection_rate(self):
         if self.total_cycles == 0:
@@ -352,17 +365,39 @@ def write_session_report(stats, args):
         pct = round(count / stats.total_cycles * 100, 1)
         lines.append(f"    {cond:<35} {count:>5}  ({pct}%)")
     lines += ["", "  ── Simulated Patient Demographics ──────"]
+    lines.append(f"  (based on {stats.injected_cycles} injected cycles)")
+    demo_base = stats.injected_cycles if stats.injected_cycles else 1
     for sex, count in sorted(stats.by_sex.items()):
-        pct = round(count / stats.total_cycles * 100, 1)
+        pct = round(count / demo_base * 100, 1)
         lines.append(f"    {sex:<20} {count:>5} patients  ({pct}%)")
     lines += ["", "  ── Age Distribution ─────────────────────"]
     for bucket in ["Under 30", "30–44", "45–59", "60–74", "75+"]:
         count = stats.age_buckets.get(bucket, 0)
-        pct = round(count / stats.total_cycles * 100, 1)
+        pct = round(count / demo_base * 100, 1)
         lines.append(f"    {bucket:<20} {count:>5} patients  ({pct}%)")
     lines += [
         "",
         f"  Log file: {LOG_FILE}",
+        "",
+        "  ── Background (Non-Injected) Cycle Conditions ──",
+    ]
+    if stats.non_injected_conditions:
+        for cond, count in sorted(stats.non_injected_conditions.items(), key=lambda x: -x[1])[:10]:
+            pct = round(count / stats.total_cycles * 100, 1)
+            lines.append(f"    {cond:<35} {count:>5}  ({pct}%)")
+    else:
+        lines.append("    None recorded.")
+
+    lines += ["", "  ── Female Patient Detail (Non-Injected) ────"]
+    if stats.female_detail:
+        lines.append("  Female patients appeared in background cycles only.")
+        lines.append("  Conditions they tested for:")
+        for cond, count in sorted(stats.female_detail.items(), key=lambda x: -x[1]):
+            lines.append(f"    {cond:<35} {count:>5} female patients")
+    else:
+        lines.append("    No female patients recorded in non-injected cycles.")
+    lines += [
+        "",
         "=" * 60,
         "  © The Christman AI Project. All Rights Reserved.",
         "=" * 60,

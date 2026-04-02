@@ -1,0 +1,53 @@
+============================================================
+  OpenSmell — Session Report
+  The Christman AI Project | Luma Cognify AI
+============================================================
+  Date/Time:        2026-04-01 22:48:10
+  Duration:         0:00:27
+  Speed Mode:       turbo
+  Seed:             random (unseeded)
+  Total Cycles:     1000
+  Detection Rate:   98.2%
+  Alert Rate:       35.4%
+  Total Alerts:     354
+  No-Match Cycles:  18
+
+  ── Detections by Category ──────────────
+    oncology               215 cycles  (21.5%)
+    behavioral             102 cycles  (10.2%)
+    neurological            76 cycles  (7.6%)
+    metabolic               60 cycles  (6.0%)
+    infectious              29 cycles  (2.9%)
+
+  ── Detections by Severity ──────────────
+    critical               252 cycles  (25.2%)
+    high                   174 cycles  (17.4%)
+    none                    56 cycles  (5.6%)
+
+  ── Top Conditions Detected ─────────────
+    Prostate Cancer                       148  (14.8%)
+    Calm / Stable                          56  (5.6%)
+    Alzheimer's Disease                    51  (5.1%)
+    Liver Disease                          37  (3.7%)
+    Breast Cancer                          26  (2.6%)
+    Stress / Rage Onset                    25  (2.5%)
+    Parkinson's Disease                    25  (2.5%)
+    Diabetes (Type 1/2)                    23  (2.3%)
+    Sepsis                                 18  (1.8%)
+    Ovarian Cancer                         16  (1.6%)
+
+  ── Simulated Patient Demographics ──────
+    Female                 169 patients  (16.9%)
+    Male                   331 patients  (33.1%)
+
+  ── Age Distribution ─────────────────────
+    Under 30                30 patients  (3.0%)
+    30–44                   44 patients  (4.4%)
+    45–59                  115 patients  (11.5%)
+    60–74                  159 patients  (15.9%)
+    75+                    152 patients  (15.2%)
+
+  Log file: opensmell_log.csv
+============================================================
+  © The Christman AI Project. All Rights Reserved.
+============================================================

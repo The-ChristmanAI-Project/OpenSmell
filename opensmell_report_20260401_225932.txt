@@ -1,0 +1,84 @@
+============================================================
+  OpenSmell — Session Report
+  The Christman AI Project | Luma Cognify AI
+============================================================
+  Date/Time:        2026-04-01 22:59:05
+  Duration:         0:00:27
+  Speed Mode:       turbo
+  Seed:             random (unseeded)
+  Total Cycles:     1000
+  Detection Rate:   98.7%
+  Alert Rate:       37.9%
+  Total Alerts:     379
+  No-Match Cycles:  13
+
+  ── Detections by Category ──────────────
+    oncology               251 cycles  (25.1%)
+    behavioral              87 cycles  (8.7%)
+    neurological            63 cycles  (6.3%)
+    metabolic               63 cycles  (6.3%)
+    infectious              23 cycles  (2.3%)
+
+  ── Detections by Severity ──────────────
+    critical               286 cycles  (28.6%)
+    high                   160 cycles  (16.0%)
+    none                    41 cycles  (4.1%)
+
+  ── Top Conditions Detected ─────────────
+    Prostate Cancer                       183  (18.3%)
+    Alzheimer's Disease                    45  (4.5%)
+    Calm / Stable                          41  (4.1%)
+    Liver Disease                          41  (4.1%)
+    Stress / Rage Onset                    23  (2.3%)
+    Ovarian Cancer                         23  (2.3%)
+    Diabetes (Type 1/2)                    22  (2.2%)
+    Breast Cancer                          21  (2.1%)
+    Parkinson's Disease                    18  (1.8%)
+    Lung Cancer                            15  (1.5%)
+
+  ── Simulated Patient Demographics ──────
+  (based on 208 injected cycles)
+    Male                   208 patients  (100.0%)
+
+  ── Age Distribution ─────────────────────
+    Under 30                 0 patients  (0.0%)
+    30–44                    0 patients  (0.0%)
+    45–59                   53 patients  (25.5%)
+    60–74                   55 patients  (26.4%)
+    75+                    100 patients  (48.1%)
+
+  Log file: opensmell_log.csv
+
+  ── Background (Non-Injected) Cycle Conditions ──
+    Liver Disease                          36  (3.6%)
+    Alzheimer's Disease                    34  (3.4%)
+    Calm / Stable                          34  (3.4%)
+    Prostate Cancer                        25  (2.5%)
+    Stress / Rage Onset                    23  (2.3%)
+    Breast Cancer                          21  (2.1%)
+    Diabetes (Type 1/2)                    21  (2.1%)
+    Lung Cancer                            13  (1.3%)
+    Parkinson's Disease                    13  (1.3%)
+    Pre-Seizure / Fit Warning              12  (1.2%)
+
+  ── Female Patient Detail (Non-Injected) ────
+  Female patients appeared in background cycles only.
+  Conditions they tested for:
+    Breast Cancer                          21 female patients
+    Calm / Stable                          18 female patients
+    Liver Disease                          18 female patients
+    Alzheimer's Disease                    17 female patients
+    Stress / Rage Onset                    11 female patients
+    Diabetes (Type 1/2)                    10 female patients
+    Ovarian Cancer                         10 female patients
+    Parkinson's Disease                     8 female patients
+    Sepsis                                  8 female patients
+    Lung Cancer                             7 female patients
+    Pre-Seizure / Fit Warning               6 female patients
+    Fight-or-Flight Escalation              5 female patients
+    COVID-19                                5 female patients
+    Colorectal Cancer                       3 female patients
+
+============================================================
+  © The Christman AI Project. All Rights Reserved.
+============================================================
