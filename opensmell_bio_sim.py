@@ -58,8 +58,8 @@ VOC_COVARIANCE_GROUPS = [
     {"members": ["isoprene", "acetone", "ethane"],        "correlation": 0.65},
     # Protein catabolism cluster
     {"members": ["ammonia", "dimethyl_sulfide", "sulfur"], "correlation": 0.70},
-    # Lipid peroxidation cluster
-    {"members": ["aldehydes", "alkanes", "hydrocarbons"],  "correlation": 0.60},
+    # Lipid peroxidation cluster — elevated in neurodegeneration
+    {"members": ["lipid_oxidation", "aldehydes", "alkanes"],  "correlation": 0.72},
     # Ketone body cluster (metabolic stress)
     {"members": ["acetone", "propanol", "ketones"],        "correlation": 0.75},
     # Microbial/gut fermentation cluster

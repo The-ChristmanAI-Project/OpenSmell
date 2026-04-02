@@ -45,7 +45,7 @@ SCENT_PROFILES = {
     "serotonin_drop":       {"category": "behavioral",   "condition": "Depressive Spiral",          "vocs": ["dimethyl_sulfide", "acetone"],    "alert": True,  "severity": "high"},
     "adrenaline_surge":     {"category": "behavioral",   "condition": "Fight-or-Flight Escalation", "vocs": ["isoprene", "ammonia"],            "alert": True,  "severity": "critical"},
     "neurological_prefit":  {"category": "behavioral",   "condition": "Pre-Seizure / Fit Warning",  "vocs": ["ammonia", "alkanes"],             "alert": True,  "severity": "critical"},
-    "calm_baseline":        {"category": "behavioral",   "condition": "Calm / Stable",              "vocs": ["ethanol_trace"],                  "alert": False, "severity": "none"},
+    "calm_baseline":        {"category": "behavioral",   "condition": "Calm / Stable",              "vocs": ["ethanol_trace", "isoprene"],      "alert": False, "severity": "none"},
 
     # ── Cancer Signatures ───────────────────────
     "lung_cancer":          {"category": "oncology",     "condition": "Lung Cancer",                "vocs": ["alkanes", "benzene", "aldehydes"],        "alert": True,  "severity": "critical"},
@@ -56,11 +56,11 @@ SCENT_PROFILES = {
 
     # ── Neurological / Degenerative ─────────────
     "parkinsons":           {"category": "neurological", "condition": "Parkinson's Disease",        "vocs": ["sebum_vocs", "aldehydes"],                "alert": True,  "severity": "high"},
-    "alzheimers":           {"category": "neurological", "condition": "Alzheimer's Disease",        "vocs": ["lipid_oxidation"],                        "alert": True,  "severity": "high"},
+    "alzheimers":           {"category": "neurological", "condition": "Alzheimer's Disease",        "vocs": ["lipid_oxidation", "aldehydes", "alkanes"], "alert": True,  "severity": "high"},
 
     # ── Metabolic / Infectious ──────────────────
     "diabetes_t1t2":        {"category": "metabolic",   "condition": "Diabetes (Type 1/2)",        "vocs": ["acetone", "propanol"],                    "alert": True,  "severity": "high"},
-    "liver_disease":        {"category": "metabolic",   "condition": "Liver Disease",              "vocs": ["dimethyl_sulfide"],                       "alert": True,  "severity": "high"},
+    "liver_disease":        {"category": "metabolic",   "condition": "Liver Disease",              "vocs": ["dimethyl_sulfide", "ammonia", "ketones"], "alert": True,  "severity": "high"},
     "covid19":              {"category": "infectious",   "condition": "COVID-19",                   "vocs": ["isoprene", "aldehydes"],                  "alert": True,  "severity": "high"},
     "sepsis":               {"category": "infectious",   "condition": "Sepsis",                     "vocs": ["ammonia", "sulfur"],                      "alert": True,  "severity": "critical"},
 }
