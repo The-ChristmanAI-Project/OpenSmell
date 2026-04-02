@@ -31,6 +31,7 @@ import argparse
 from datetime import datetime
 from collections import defaultdict
 from colorama import Fore, Style, init
+from opensmell_bio_sim import bio_simulate_sensor_reading, generate_patient_baseline
 
 init(autoreset=True)
 
@@ -420,6 +421,7 @@ def print_cycle(cycle, reading, matches, alert, stats, target_cycles):
     print(f"\n{Fore.CYAN}{'─'*60}")
     print(f"{Fore.CYAN}  OpenSmell  │  Cycle {cycle_label}  │  {ts}  │  Alerts: {stats.alerts}")
     print(f"{Fore.CYAN}  Patient:   │  {patient.get('sex','—')}  │  DOB: {patient.get('year_of_birth','—')}  │  Age: {patient.get('age','—')}")
+    print(f"{Fore.CYAN}  Phase:     │  {reading.get('__phase__','—')}  — {reading.get('__phase_desc__','—')}")
     if injected:
         print(f"{Fore.MAGENTA}  [TEST INJECT] → {injected}")
     print(f"{Fore.CYAN}{'─'*60}{Style.RESET_ALL}")
@@ -470,12 +472,18 @@ def run():
     try:
         while True:
             stats.total_cycles += 1
-            reading      = simulate_sensor_reading(args.inject, args.inject_rate)
+            # Generate fresh patient baseline each cycle — unique biological fingerprint
+            patient_baseline = generate_patient_baseline(ALL_VOCS)
+            reading      = bio_simulate_sensor_reading(
+                               ALL_VOCS, SCENT_PROFILES,
+                               inject_profile=args.inject,
+                               inject_rate=args.inject_rate,
+                               patient_baseline=patient_baseline
+                           )
             matches      = classify_vocs(reading)
             alert        = detect_anomaly(matches)
             injected_key = reading.get("__injected_key__", None)
             top_profile  = matches[0]["profile_id"] if matches else None
-            # Injected profile is clinical ground truth — passed as authority
             patient      = generate_patient(top_profile=top_profile, injected_profile=injected_key)
             reading["__patient__"] = patient
             stats.record(matches, alert, patient, injected_key)
