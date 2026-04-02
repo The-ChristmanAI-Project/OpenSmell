@@ -1,0 +1,42 @@
+============================================================
+  OpenSmell — Session Report
+  The Christman AI Project | Luma Cognify AI
+============================================================
+  Date/Time:        2026-04-01 22:09:25
+  Duration:         0:00:27
+  Speed Mode:       turbo
+  Seed:             random (unseeded)
+  Total Cycles:     1000
+  Detection Rate:   97.7%
+  Alert Rate:       35.7%
+  Total Alerts:     357
+  No-Match Cycles:  23
+
+  ── Detections by Category ──────────────
+    metabolic              211 cycles  (21.1%)
+    behavioral             117 cycles  (11.7%)
+    oncology                83 cycles  (8.3%)
+    neurological            47 cycles  (4.7%)
+    infectious              19 cycles  (1.9%)
+
+  ── Detections by Severity ──────────────
+    high                   303 cycles  (30.3%)
+    critical               121 cycles  (12.1%)
+    none                    53 cycles  (5.3%)
+
+  ── Top Conditions Detected ─────────────
+    Diabetes (Type 1/2)                   172  (17.2%)
+    Calm / Stable                          53  (5.3%)
+    Liver Disease                          39  (3.9%)
+    Alzheimer's Disease                    36  (3.6%)
+    Stress / Rage Onset                    35  (3.5%)
+    Breast Cancer                          29  (2.9%)
+    Prostate Cancer                        24  (2.4%)
+    Sepsis                                 15  (1.5%)
+    Ovarian Cancer                         14  (1.4%)
+    Pre-Seizure / Fit Warning              14  (1.4%)
+
+  Log file: opensmell_log.csv
+============================================================
+  © The Christman AI Project. All Rights Reserved.
+============================================================
