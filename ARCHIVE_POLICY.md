@@ -85,9 +85,12 @@ Preserves full pre-change file bodies. No past erased.
 
 | Archive ID | Zip | Why |
 |------------|-----|-----|
-| `20260717_claimlock_precorrection` | `OpenSmell/archives/OpenSmell_claimlock_precorrection_20260717.zip` in EverettNC/storage | Claim-lock removed inflated 2,401/2400+ counts; prior bodies preserved |
+| `20260717_claimlock_precorrection` | `OpenSmell/archives/OpenSmell_claimlock_precorrection_20260717.zip` in EverettNC/storage, branch `opensmell-archives` | Claim-lock removed inflated 2,401/2400+ counts; prior bodies preserved |
+| `20261011_flagship_correction` | `OpenSmell/archives/OpenSmell_flagship_correction_20261011.zip` in EverettNC/storage, branch `opensmell-archives` | Cycle double-count fixed (23,686 reported, 11,843 real); ground-truth logging finished; mixed-schema log removed; labeled accuracy settled at 87.2% exact / 89.1% group |
 
-Local mirror: `OpenSmell/archives/OpenSmell_claimlock_precorrection_20260717.zip`
+Local mirrors: `OpenSmell/archives/OpenSmell_claimlock_precorrection_20260717.zip`, `OpenSmell/archives/OpenSmell_flagship_correction_20261011.zip`
+
+Storage note (2026-10-11): `main` on EverettNC/storage is locked (branch lock, enforced for admins). Both archives were deposited on 2026-10-11 to branch `opensmell-archives` (commit dcf1b20), each as the zip plus an unpacked folder `OpenSmell/archives/<ArchiveID>/`. The 2026-07-17 archive had been listed here as deposited but was not in the storage repo before that date.
 
 ---
 
