@@ -37,7 +37,7 @@ Status date: **2026-07-19**. Only measured work is listed as done.
 |-----------|------------------|
 | Single classify engine for sim + production path | `open_smell2.py` |
 | Bio-realistic sim + continuous test harness | `opensmell_bio_sim.py`, `opensmell_test_loop.py` |
-| Flagship sim endurance | `VALIDATION.md` — 23,686 cycles · **77.81%** injection accuracy · **96.19%** detection (sim, full noise) |
+| Flagship sim endurance | `VALIDATION.md` — 11,843 cycles · **77.81%** injection accuracy · **92.38%** detection (sim, full noise) |
 | Labeled sim specificity work + per-profile scorecard | `BIOMARKER_SPECIFICITY.md`, `SCORECARD.md` |
 | Unit / integration tests | `python3 -m unittest test_open_smell2 test_alert_integration` (34 tests) |
 | **Claim lock** (never inflated profile counts; no fantasy clinical claims) | `CLAIM_LOCK.md`, `scripts/claim_lint.py` |

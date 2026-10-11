@@ -15,8 +15,8 @@ makes conditions collide. This round fixed that with literature-grounded
 biomarkers and a specificity-aware confidence score.
 
 > **Where this fits:** The **flagship run** is the July 5, 2026 endurance scan
-> (23,686 cycles, unseeded, full noise; 96.19% detection, 77.81% injection accuracy) -
-> see `VALIDATION.md`. The 88.7% below is the **controlled-conditions** benchmark
+> (11,843 cycles, unseeded, full noise; 92.38% detection, 77.81% injection accuracy) -
+> see `VALIDATION.md`. The 87.2% below is the **controlled-conditions** benchmark
 > from the labeled experiment. Both are real; the controlled number is higher
 > because the test is cleaner. Neither is clinical accuracy.
 
@@ -82,7 +82,7 @@ supersets. Round 2 adds literature-grounded multi-channel signatures:
 | Stage | Top-1 accuracy |
 |-------|----------------|
 | Round 1 (markers + specificity score) | 78.8% |
-| **Round 2 (+ renal + sepsis markers)** | **88.7%** |
+| **Round 2 (+ renal + sepsis markers)** | **87.2%** exact · 89.1% group (from committed `opensmell2_labeled_experiment.csv`; an earlier write-up said 88.7%, which the committed data does not reproduce) |
 
 Renal recall: **36.9% → 100%**. Sepsis recall: **52.5% → 99.2%**.
 Confidence–correctness correlation: **+0.42**. Background false-alert @0.7: **0%**.

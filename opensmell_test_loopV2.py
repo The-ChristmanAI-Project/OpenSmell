@@ -236,7 +236,7 @@ def get_alert_action(severity, category):
 # ─────────────────────────────────────────────
 # LOGGER
 # ─────────────────────────────────────────────
-LOG_FILE = "opensmell_log.csv"
+LOG_FILE = os.environ.get("OPENSMELL_LOG_FILE", "opensmell_log.csv")
 
 # Canonical header. Ground-truth columns (is_injected / injected_key /
 # injected_condition) sit BEFORE the prediction columns so every row reads
@@ -322,7 +322,8 @@ class SessionStats:
         self.female_detail    = defaultdict(int)          # what females tested for (non-injected)
 
     def record(self, matches, alert, patient, injected_key):
-        self.total_cycles += 1
+        # total_cycles is incremented once per cycle in run(); incrementing it
+        # here as well doubled every cycle count. Fixed 2026-10-11.
 
         # Only count demographics when injection actually fired
         # Non-injected cycles have random sex and would corrupt targeted test results

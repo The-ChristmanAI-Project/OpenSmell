@@ -1,7 +1,8 @@
 #!/bin/bash
 # OpenSmell Grant Validation Batch Runner
 # Runs labeled simulation across key profile categories.
-# More cycles = stronger grant evidence. Logs append to opensmell_log.csv.
+# More cycles = stronger grant evidence. Logs go to $OPENSMELL_LOG_FILE
+# (default opensmell_log_grant_batch.csv) with ground-truth columns.
 
 set -e
 cd "$(dirname "$0")"

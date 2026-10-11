@@ -203,21 +203,55 @@ def get_alert_action(severity, category):
 # ─────────────────────────────────────────────
 # LOGGER
 # ─────────────────────────────────────────────
-LOG_FILE = "opensmell_log.csv"
+# OPENSMELL_LOG_FILE lets a batch runner send its rows to its own file
+# (run_grant_batch.sh sets it). Default stays opensmell_log.csv.
+LOG_FILE = os.environ.get("OPENSMELL_LOG_FILE", "opensmell_log.csv")
+
+# Canonical header, same as opensmell_test_loopV2.py. Ground-truth columns
+# (is_injected / injected_key / injected_condition) sit BEFORE the prediction
+# columns so every row reads truth | prediction | features. Without them a
+# log can show coverage but can never be audited for accuracy.
+LOG_HEADER = [
+    "timestamp", "sex", "year_of_birth", "age",
+    "is_injected", "injected_key", "injected_condition",
+    "top_match", "category", "confidence", "severity",
+    "alert_triggered", "action", "raw_vocs"
+]
 
 def init_log():
+    """Create the log with the canonical header.
+
+    If a log already exists with a different header (the pre-ground-truth
+    11-column schema), it is renamed to a timestamped backup so labeled rows
+    are never appended under an incompatible schema.
+    """
+    if os.path.exists(LOG_FILE):
+        with open(LOG_FILE, "r", newline="") as f:
+            first = next(csv.reader(f), [])
+        if first != LOG_HEADER:
+            stem = os.path.splitext(LOG_FILE)[0]
+            backup = f"{stem}.pre_gt_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"
+            os.rename(LOG_FILE, backup)
+            print(f"  [logger] existing log had a legacy schema — archived to {backup}")
     if not os.path.exists(LOG_FILE):
         with open(LOG_FILE, "w", newline="") as f:
-            writer = csv.writer(f)
-            writer.writerow([
-                "timestamp", "sex", "year_of_birth", "age",
-                "top_match", "category", "confidence", "severity",
-                "alert_triggered", "action", "raw_vocs"
-            ])
+            csv.writer(f).writerow(LOG_HEADER)
 
 def log_result(reading, matches, alert):
     top = matches[0] if matches else {}
     patient = reading.get("__patient__", {})
+
+    # Ground truth: the simulator records which profile it injected this cycle
+    # in reading["__injected_key__"] (None on background cycles, whose true
+    # label is "Healthy / Background" and correct prediction is "No match").
+    injected_key = reading.get("__injected_key__")
+    is_injected = injected_key is not None
+    if is_injected:
+        prof = SCENT_PROFILES.get(injected_key)
+        injected_condition = prof.condition if prof is not None else injected_key
+    else:
+        injected_condition = "Healthy / Background"
+
     with open(LOG_FILE, "a", newline="") as f:
         writer = csv.writer(f)
         writer.writerow([
@@ -225,6 +259,9 @@ def log_result(reading, matches, alert):
             patient.get("sex", "—"),
             patient.get("year_of_birth", "—"),
             patient.get("age", "—"),
+            is_injected,
+            injected_key if is_injected else "—",
+            injected_condition,
             top.get("condition", "No match"),
             top.get("category", "—"),
             top.get("confidence", 0),
@@ -255,7 +292,9 @@ class SessionStats:
         self.inject_misses    = 0
 
     def record(self, matches, alert, patient, injected_key):
-        self.total_cycles += 1
+        # total_cycles is incremented once per cycle in run(); incrementing it
+        # here as well doubled every cycle count, which inflated the detection
+        # rate and halved the alert and category rates. Fixed 2026-10-11.
         if injected_key is not None:
             self.injected_cycles += 1
             if matches and matches[0]["profile_id"] == injected_key:

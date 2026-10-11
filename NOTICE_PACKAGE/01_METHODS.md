@@ -88,8 +88,8 @@ Scoring for group-aware accuracy uses `same_group()` in `open_smell2.py`.
 
 **Flagship endurance (reported in VALIDATION.md):**
 
-- 23,686 cycles · unseeded · full noise · ~6h 35m  
-- Detection rate 96.19%  
+- 11,843 cycles · unseeded · full noise · ~6h 35m  
+- Detection rate 92.38%  
 - Injection accuracy **77.81%** (when injection events occurred)  
 
 **Labeled experiment:** per-profile group/exact recall in `docs/SCORECARD.md` (snapshot). Rebuild with `python3 run_labeled_experiment.py` from repo root (long run).

@@ -43,8 +43,8 @@ From `docs/opensmell_engine_truth.json` and `docs/VALIDATION.md` at pack snapsho
 | Live profiles | **21** |
 | Catalog / research_only | **26** / **5** |
 | Sensor channels (proxy bands) | **20** |
-| Flagship injection accuracy (full noise) | **77.81%** · 23,686 cycles |
-| Flagship detection rate | **96.19%** |
+| Flagship injection accuracy (full noise) | **77.81%** · 11,843 cycles |
+| Flagship detection rate | **92.38%** |
 | Controlled labeled (see SCORECARD / BIOMARKER docs) | closed-loop sim only |
 | Clinical accuracy | **Not claimed** |
 

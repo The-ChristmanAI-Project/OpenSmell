@@ -22,8 +22,8 @@
 - Diabetes T1/T2 share acetone and are a **degenerate group** (`diabetes_ketosis`). Exact T2→T1 swaps are group-correct; acetone stealing by ketoacidosis is a real limit.  
 - High sim recall ≠ clinical performance.  
 
-**Headline labeled run (historical write-up):** see `BIOMARKER_SPECIFICITY.md` (~88.7% top-1 under that protocol).  
-**Flagship endurance (full noise):** 77.81% injection accuracy · 23,686 cycles — `VALIDATION.md`.
+**Headline labeled run (historical write-up):** see `BIOMARKER_SPECIFICITY.md` (87.2% exact top-1 · 89.1% group, recomputed from the committed CSV).  
+**Flagship endurance (full noise):** 77.81% injection accuracy · 11,843 cycles (originally reported as 23,686; see correction in `VALIDATION.md`) — `VALIDATION.md`.
 
 ---
 

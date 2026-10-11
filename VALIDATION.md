@@ -22,15 +22,30 @@ as it fell:
 | Flagship scan (unseeded, full noise) | Result |
 |---|---|
 | Live sensor-grounded profiles | 21 |
-| Total cycles | 23,686 |
+| Total cycles | 11,843 (originally reported as 23,686; see correction below) |
 | Duration | 6h 35m (normal speed) |
-| Detection rate | 96.19% |
+| Detection rate | 92.38% (originally reported as 96.19%) |
 | **Injection accuracy** | **77.81%** (2,276 hits / 2,925 injected cycles) |
-| Alert rate | 2.13% (505 alerts) |
+| Alert rate | 4.26% (505 alerts; originally reported as 2.13%) |
 | No-match cycles | 903 |
 
 Source report: `reports/opensmell_report_20260705_052559.txt`
 Full per-cycle data: `opensmell_log_20260705.zip` (104,453 rows)
+
+> **Correction, 2026-10-11 — cycle count and rates.** The test loop that ran
+> this scan incremented its cycle counter twice per cycle (once in `run()`, once
+> in `SessionStats.record()`). The original report printed 23,686 cycles; the
+> real count is **11,843**. Proof: normal speed is 2.0 s per cycle, and 11,843 x 2 s
+> = 6h 34m 46s, matching the 6h 35m run time. The doubled total inflated the
+> detection rate (originally reported 96.19%) and halved the alert rate (originally
+> 2.13%). Hits, misses, no-match and alert counts were each counted once and are
+> unchanged, so **injection accuracy, 77.81% (2,276 / 2,925), is unaffected.**
+> The bug is fixed in both test loops. The original report is kept unedited in
+> `reports/`; full pre-correction document bodies are archived in
+> `archives/OpenSmell_flagship_correction_20261011.zip`.
+> Note: the per-cycle log in `opensmell_log_20260705.zip` holds 10,932 rows for this
+> run window, 911 fewer than the 11,843 cycles counted. The log predates the
+> ground-truth columns and cannot be used to re-audit accuracy.
 
 ### Controlled benchmark - labeled experiment
 
@@ -40,14 +55,15 @@ the labeled experiment reaches higher separability:
 | Controlled labeled experiment | Result |
 |---|---|
 | Injected cycles | 63,000 |
-| **Top-1 accuracy** | **88.7%** |
+| **Top-1 accuracy (exact)** | **87.2%** (54,951 / 63,000) |
+| Top-1 accuracy (group, diabetes T1/T2 as one ketosis group) | 89.1% (56,102 / 63,000) |
 | Confidence-correctness correlation | +0.42 |
 | Background false-alert rate @0.7 | ~0% |
 
 Source: `BIOMARKER_SPECIFICITY.md`, `opensmell2_labeled_experiment.csv`
 
 **Read both numbers together.** Identification runs ~78% under full real-world
-noise and ~89% under controlled conditions. The harder the test, the lower the
+noise and ~87% under controlled conditions. The harder the test, the lower the
 number - that gap is expected and is stated, not smoothed. A classifier that
 scored identically under noise and clean conditions would be the one to distrust.
 

@@ -33,7 +33,7 @@ Use locked text from `../INTENDED_USE.md`. Do not expand in the Q-Sub cover beyo
 | Evidence | Status |
 |----------|--------|
 | Closed-loop synthetic labeled experiment | Documented; not clinical |
-| Flagship endurance sim | 23,686 cycles; 77.81% injection accuracy |
+| Flagship endurance sim | 11,843 cycles; 77.81% injection accuracy |
 | Unit/integration tests | 34 tests as of claim-lock session |
 | Human breath/skin clinical study | Not yet in this repository |
 | Analytical validation vs known VOC mixtures | Protocol planned; results when measured |

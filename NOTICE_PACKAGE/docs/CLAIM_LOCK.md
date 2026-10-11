@@ -26,9 +26,9 @@ If an outbound sentence conflicts with these files, **the files win**. Fix the s
 | Catalog | **26** | Includes research_only |
 | Research-only | **5** | Not used in live matching |
 | Sensor channels | **20** | Proxy response bands, not GC-MS species |
-| Flagship injection accuracy | **77.81%** | 23,686 cycles, full noise (sim) |
-| Flagship detection rate | **96.19%** | Same run (sim) |
-| Controlled labeled group accuracy | **see SCORECARD / BIOMARKER** | Closed-loop sim |
+| Flagship injection accuracy | **77.81%** | 11,843 cycles, full noise (sim) |
+| Flagship detection rate | **92.38%** | Same run (sim). Corrected 2026-10-11 from 96.19% (cycle double-count) |
+| Controlled labeled accuracy | **87.2%** exact · **89.1%** group | 63,000 cycles, closed-loop sim |
 | Conf–correctness | **+0.42** | Labeled sim |
 | Background false-alert @0.7 | **~0%** | Labeled sim background |
 
